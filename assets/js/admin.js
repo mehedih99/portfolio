@@ -65,6 +65,19 @@
   $('#importFile').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{state=JSON.parse(await f.text());render();flash('Backup imported — click Save & Publish.')}catch{alert('Invalid JSON backup.')}});
   $('#sideNav').addEventListener('click',e=>{const b=e.target.closest('button[data-tab]');if(!b)return;activeTab=b.dataset.tab;document.querySelectorAll('#sideNav button').forEach(x=>x.classList.toggle('active',x===b));render()});
   $('#saveBtn').addEventListener('click',async()=>{btnBusy(true);try{const r=await core.saveContent(state);flash(r.localOnly?'Saved in this browser (local preview).':'Saved & published successfully.');setStatus();}catch(e){alert('Save failed: '+e.message)}finally{btnBusy(false)}});
+  $('#pdfBtn')?.addEventListener('click',async()=>{
+    const pdfWindow=window.open('about:blank','_blank');
+    try{
+      const r=await core.saveContent(state);
+      flash(r.localOnly?'Latest changes saved locally. Preparing PDF…':'Latest changes saved & published. Preparing PDF…');
+      const url='pdf.html?download=1&t='+Date.now();
+      if(pdfWindow){pdfWindow.location.href=url;}else{location.href=url;}
+      setStatus();
+    }catch(e){
+      if(pdfWindow) pdfWindow.close();
+      alert('Could not prepare latest PDF: '+e.message);
+    }
+  });
   $('#logoutBtn').addEventListener('click',async()=>{if(sb)await sb.auth.signOut();location.reload()});
   function setStatus(){const dot=$('#statusDot'),text=$('#statusText'); if(core.configured){dot.classList.add('ok');text.textContent='Supabase connected • Live CMS ready';$('#setupNotice').innerHTML='';}else{dot.classList.remove('ok');text.textContent='Local demo mode • Supabase not configured';$('#setupNotice').innerHTML='<div class="notice">The website is fully usable with built-in content, but edits are only visible on this browser until Supabase is connected. Open <b>setup-config.html</b> and follow the included guide for the one-time live setup.</div>';}}
   async function showApp(){document.querySelector('.login-wrap').classList.add('hidden');setStatus();render()}
