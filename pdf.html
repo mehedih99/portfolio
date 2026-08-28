@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102b46">
+  <title>Latest Portfolio PDF | MD Mehedi Hasan</title>
+  <link rel="stylesheet" href="assets/css/pdf.css">
+</head>
+<body>
+  <div class="pdf-toolbar" id="pdfToolbar">
+    <div><b>Live Portfolio PDF</b><span id="pdfStatus">Loading current published content…</span></div>
+    <div class="toolbar-actions"><a href="admin.html" class="tool-btn">Back to Admin</a><button id="downloadBtn" class="tool-btn primary" disabled>Download Latest PDF</button></div>
+  </div>
+  <main id="pdfRoot" aria-live="polite"></main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/core.js"></script>
+  <script src="assets/js/pdf.js"></script>
+</body>
+</html>
