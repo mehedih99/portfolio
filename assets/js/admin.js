@@ -18,6 +18,7 @@
     editor.querySelectorAll('[data-action]').forEach(btn=>btn.addEventListener('click',()=>handleAction(btn.dataset.action,btn.dataset.index)));
   }
   async function uploadFor(path){
+    if(demo){flash('Sign in to upload media.');return}
     if(!core.configured){flash('Configure Supabase first for live media uploads.');return}
     const input=document.createElement('input');input.type='file';input.accept='image/*,application/pdf';input.onchange=async()=>{const file=input.files?.[0];if(!file)return;btnBusy(true);try{const url=await core.uploadFile(file);setPath(path,url);render();flash('Upload complete');}catch(e){alert(e.message)}finally{btnBusy(false)}};input.click();
   }
@@ -79,7 +80,7 @@
     }
   });
   $('#logoutBtn').addEventListener('click',async()=>{if(sb)await sb.auth.signOut();location.reload()});
-  function setStatus(){const dot=$('#statusDot'),text=$('#statusText'); if(core.configured){dot.classList.add('ok');text.textContent='Supabase connected • Live CMS ready';$('#setupNotice').innerHTML='';}else{dot.classList.remove('ok');text.textContent='Local demo mode • Supabase not configured';$('#setupNotice').innerHTML='<div class="notice">The website is fully usable with built-in content, but edits are only visible on this browser until Supabase is connected. Open <b>setup-config.html</b> and follow the included guide for the one-time live setup.</div>';}}
+  function setStatus(){if(demo){$('#statusDot').classList.remove('ok');$('#statusText').textContent='Demo workspace · not signed in';$('#saveBtn').disabled=true;$('#pdfBtn').disabled=true;$('#setupNotice').innerHTML='<div class="notice">Explore the editor in demo mode. Sign in to publish changes, upload media or generate a new PDF.</div>';return}const dot=$('#statusDot'),text=$('#statusText'); if(core.configured){dot.classList.add('ok');text.textContent='Supabase connected • Live CMS ready';$('#setupNotice').innerHTML='';}else{dot.classList.remove('ok');text.textContent='Local demo mode • Supabase not configured';$('#setupNotice').innerHTML='<div class="notice">The website is fully usable with built-in content, but edits are only visible on this browser until Supabase is connected. Open <b>setup-config.html</b> and follow the included guide for the one-time live setup.</div>';}}
   async function showApp(){document.querySelector('.login-wrap').classList.add('hidden');setStatus();render()}
   $('#demoBtn').addEventListener('click',()=>{demo=true;showApp()});
   $('#loginBtn').addEventListener('click',async()=>{
