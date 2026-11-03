@@ -76,6 +76,7 @@
   $('#footerYear').textContent = new Date().getFullYear();
 
   $('#whatsappLink').href = 'https://wa.me/'+content.profile.phone.replace(/\D/g,'');
+  window.PortfolioModern?.init(content);
   document.dispatchEvent(new Event('portfolio:ready'));
 
   // Header + mobile menu
