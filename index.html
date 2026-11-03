@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#102b46">
   <title>MD Mehedi Hasan | F&B Operations & Cafe Management UAE</title>
   <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/editorial.css">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -22,37 +23,38 @@
   </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container nav">
     <a class="brand" href="#home"><span class="brand-mark">MH</span><span id="brandName">MD Mehedi Hasan</span></a>
-    <nav class="nav-links" id="navLinks">
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
       <a href="#about">About</a><a href="#career">Career</a><a href="#operations">Operations</a><a href="#events">Events</a><a href="#portal">Digital</a><a href="#credentials">Credentials</a><a href="#contact" class="cta">Contact</a>
     </nav>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    <div class="nav-tools"><label class="sr-only" for="siteLanguage">Website language</label><select id="siteLanguage" aria-label="Website language"><option value="en">EN · English</option><option value="de">DE · Deutsch</option><option value="ar">AR · العربية</option></select><button id="themeToggle" aria-label="Toggle colour theme" title="Toggle colour theme">◐</button><button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false">☰</button></div>
   </div>
 </header>
 
-<main>
+<main id="main">
 <section class="hero" id="home">
   <div class="container hero-grid">
     <div>
-      <div class="eyebrow" id="heroEyebrow"></div>
+      <div class="market-label">HOSPITALITY LEADERSHIP / UAE + GERMANY</div><div class="eyebrow" id="heroEyebrow"></div>
       <h1 id="heroName"></h1>
       <div style="font-size:1.35rem;font-weight:850;color:#fff;margin-bottom:10px" id="heroHeadline"></div>
       <p class="lead" id="heroLead"></p>
       <div class="hero-pills" id="heroPills"></div>
-      <div class="hero-actions">
-        <a class="btn primary" href="#contact">Let’s Connect</a>
-        <a class="btn ghost" href="#career">View Career Journey</a>
+      <blockquote class="hero-note">Good service starts long before the first guest arrives.</blockquote><div class="hero-actions">
+        <a class="btn primary" href="#contact">Let’s talk operations ↗</a>
+        <a class="btn ghost" href="#career">Explore my experience ↓</a>
       </div>
       <div style="margin-top:24px;font-size:.86rem;color:#dce6ef"><b id="heroLocation"></b><br><span id="heroMobility"></span></div>
       <div class="hero-strip" id="heroStrip"></div>
     </div>
-    <div class="hero-photo"><img id="heroPhoto" alt="MD Mehedi Hasan"></div>
+    <figure class="portrait-wrap"><div class="hero-photo"><img id="heroPhoto" alt="MD Mehedi Hasan" fetchpriority="high"></div><figcaption><span>01 / THE PERSON BEHIND THE OPERATIONS</span><span>Sharjah, UAE</span></figcaption></figure>
   </div>
 </section>
 
-<div class="container"><section class="stats" id="stats"></section></div>
+<div class="container"><div class="section-kicker">THE MANAGEMENT SNAPSHOT <span>PEOPLE. PROCESS. DELIVERY.</span></div><section class="stats" id="stats"></section></div>
 
 <section class="section" id="about">
   <div class="container">
@@ -64,6 +66,7 @@
   </div>
 </section>
 
+<section class="section leadership-section" id="leadership"><div class="container"><div class="section-head"><div><div class="eyebrow">My management approach</div><h2>Clear direction.<br>Consistent execution.</h2></div><p class="section-copy">A manager connects the team, the numbers and the guest experience. This is how I turn responsibility into a working routine.</p></div><div class="leadership-grid"><article><span>01 / PEOPLE</span><h3>Set the team up to succeed.</h3><p>Plan shifts, delegate clearly and coach on the floor. Keep service standards practical, visible and repeatable.</p><a href="#career">Leadership journey ↗</a></article><article><span>02 / CONTROL</span><h3>Know what the operation needs.</h3><p>Connect supplier follow-up, stock counts, recipe costing and sales reporting so daily decisions stay informed.</p><a href="#commercial">Commercial responsibility ↗</a></article><article><span>03 / DELIVERY</span><h3>Stay close to execution.</h3><p>Coordinate outlet readiness, event teams and service continuity. Report directly, resolve issues and follow through.</p><a href="#events">See the work ↗</a></article></div></div></section>
 <section class="section alt" id="career">
   <div class="container">
     <div class="section-head reveal"><div><div class="eyebrow">Career Journey</div><h2>From leadership foundation<br>to UAE cafe management.</h2></div><p class="section-copy">A career shaped by training, hospitality, specialty coffee, bar supervision and progressively wider operational responsibility.</p></div>
@@ -90,7 +93,7 @@
 </section>
 
 <section class="section" id="campaign">
-  <div class="container"><div class="campaign card reveal"><img id="campaignImage" alt="Summer House campaign"><div class="copy"><span class="status" id="campaignStatus"></span><div class="eyebrow" style="margin-top:18px">Current Seasonal Campaign</div><h3 id="campaignName"></h3><div style="font-weight:850;color:var(--gold)" id="campaignConcept"></div><div style="margin:6px 0 18px;color:var(--muted)" id="campaignMeta"></div><p id="campaignSummary"></p></div></div></div>
+  <div class="container"><div class="campaign card reveal"><img id="campaignImage" alt="Summer House campaign"><div class="copy"><span class="status" id="campaignStatus"></span><div class="eyebrow" style="margin-top:18px">Featured Seasonal Campaign</div><h3 id="campaignName"></h3><div style="font-weight:850;color:var(--gold)" id="campaignConcept"></div><div style="margin:6px 0 18px;color:var(--muted)" id="campaignMeta"></div><p id="campaignSummary"></p></div></div></div>
 </section>
 
 <section class="section alt" id="commercial">
@@ -139,19 +142,22 @@
   </div>
 </section>
 
-<section class="section" id="contact">
-  <div class="container"><div class="contact reveal"><div><div class="eyebrow" style="color:#d8ba8d">Let’s Connect</div><h2 id="contactName"></h2><p id="contactHeadline"></p><p>Sharjah, UAE • Valid UAE Driving License • Own Car • Flexible to travel across the UAE</p></div><div class="contact-links"><a id="emailLink"></a><a id="phoneLink"></a><a id="linkedinLink" target="_blank" rel="noopener">LinkedIn Profile</a></div></div></div>
+<section class="section markets-section" id="markets"><div class="container"><div class="section-head"><div><div class="eyebrow">An international perspective</div><h2>UAE experience.<br>A wider professional horizon.</h2></div><p class="section-copy">Practical hospitality management, presented for employers in the UAE and Germany.</p></div><div class="market-grid"><article><span>01 / UNITED ARAB EMIRATES</span><h3>Local operational knowledge.</h3><p>UAE café operations, supplier coordination, delivery platforms, event activations and outlet openings, grounded in hands-on experience.</p></article><article><span>02 / DEUTSCHLAND</span><h3>Transferable management strengths.</h3><p>Team coordination, structured processes, stock discipline and guest service are central to my professional profile for German employers.</p></article></div><p class="locale-note">Website language options are for visitors. Spoken language proficiency is listed in the profile. Work authorization and relocation arrangements can be discussed directly.</p></div></section><section class="section" id="contact">
+  <div class="container"><div class="contact reveal"><div><div class="eyebrow" style="color:#d8ba8d">Let’s Connect</div><h2 id="contactName"></h2><p id="contactHeadline"></p><p>Sharjah, UAE • Valid UAE Driving License • Own Car • Flexible to travel across the UAE</p></div><div class="contact-links"><a href="pdf.html" target="_blank" rel="noopener">View / download portfolio PDF ↗</a><a id="whatsappLink" target="_blank" rel="noopener">WhatsApp ↗</a><a id="emailLink"></a><a id="phoneLink"></a><a id="linkedinLink" target="_blank" rel="noopener">LinkedIn Profile</a></div></div></div>
 </section>
 </main>
 
 <footer class="footer"><div class="container footer-inner"><span>© <span id="footerYear"></span> <b id="footerName"></b></span><span>F&B Operations • Cafe Management • Digital Process Improvement</span></div></footer>
 
-<div class="lightbox" id="lightbox"><button id="lightboxClose" aria-label="Close">×</button><img id="lightboxImg" alt="Expanded gallery image"></div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview"><button id="lightboxClose" aria-label="Close">×</button><img id="lightboxImg" alt="Expanded gallery image"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/config.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/core.js"></script>
+<script src="assets/js/records-locales.js"></script>
+<script src="assets/js/locales.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/editorial.js"></script>
 </body>
 </html>

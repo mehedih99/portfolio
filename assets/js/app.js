@@ -26,7 +26,7 @@
   $('#languages').innerHTML = content.profile.languages.map(x=>`<div class="feature"><h3>${esc(x.name)}</h3><p>${esc(x.level)}</p></div>`).join('');
   $('#mobility').innerHTML = content.profile.mobility.map(x=>`<span class="chip">${esc(x)}</span>`).join('');
 
-  $('#careerTimeline').innerHTML = content.career.map(x=>`<article class="timeline-item reveal"><div class="timeline-period">${esc(x.period)}</div><div class="timeline-card card"><img src="${esc(x.image)}" alt="${esc(x.company)}"><div><h3>${esc(x.title)}</h3><div class="eyebrow" style="letter-spacing:.08em;margin-top:4px">${esc(x.company)} • ${esc(x.location)}</div><p>${esc(x.summary)}</p><div class="tag-row">${(x.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></div></div></article>`).join('');
+  $('#careerTimeline').innerHTML = content.career.map(x=>`<article class="timeline-item reveal"><div class="timeline-period">${esc(x.period)}</div><div class="timeline-card card"><img loading="lazy" src="${esc(x.image)}" alt="${esc(x.company)}"><div><h3>${esc(x.title)}</h3><div class="eyebrow" style="letter-spacing:.08em;margin-top:4px">${esc(x.company)} • ${esc(x.location)}</div><p>${esc(x.summary)}</p><div class="tag-row">${(x.tags||[]).map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div></div></div></article>`).join('');
 
   $('#responsibilities').innerHTML = content.management.responsibilities.map(x=>`<div class="responsibility reveal">${esc(x)}</div>`).join('');
   $('#outletOpeningText').textContent = content.management.outletOpening;
@@ -74,11 +74,14 @@
   $('#footerName').textContent = content.profile.name;
   $('#footerYear').textContent = new Date().getFullYear();
 
+  $('#whatsappLink').href = 'https://wa.me/'+content.profile.phone.replace(/\D/g,'');
+  document.dispatchEvent(new Event('portfolio:ready'));
+
   // Header + mobile menu
   const header = $('.site-header');
   window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>25));
-  $('#menuBtn').addEventListener('click',()=>$('#navLinks').classList.toggle('open'));
-  document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>$('#navLinks').classList.remove('open')));
+  $('#menuBtn').addEventListener('click',()=>{const open=$('#navLinks').classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',String(open));});
+  document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>{$('#navLinks').classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');}));
 
   // Reveal animations
   const io = new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
@@ -100,6 +103,6 @@
 
   // Gallery lightbox
   const lb=$('#lightbox'), lbImg=$('#lightboxImg');
-  document.querySelectorAll('.gallery-item').forEach(x=>x.addEventListener('click',()=>{lbImg.src=x.dataset.img;lb.classList.add('open')}));
+  let lastFocus; document.querySelectorAll('.gallery-item, .cert-card').forEach(x=>{x.tabIndex=0;x.setAttribute('role','button');x.setAttribute('aria-label',x.querySelector('img').alt);const open=()=>{lastFocus=x;lbImg.src=x.dataset.img||x.querySelector('img').src;lbImg.alt=x.querySelector('img').alt;lb.classList.add('open');$('#lightboxClose').focus()};x.addEventListener('click',open);x.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}})}); document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape'){lb.classList.remove('open');lastFocus?.focus()}if(e.key==='Tab'){e.preventDefault();$('#lightboxClose').focus()}});
   $('#lightboxClose').addEventListener('click',()=>lb.classList.remove('open')); lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('open')});
 })();
