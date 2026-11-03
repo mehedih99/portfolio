@@ -8,6 +8,9 @@ This is a best-effort health check, not a guarantee against Supabase Free projec
 
 The public website times out a database read after five seconds and uses the last successfully loaded content cached on that browser, or built-in content if no cache exists. A failed profile photo falls back to a local image. This keeps the public presentation readable during a backend outage; live admin publishing still requires the backend to be available.
 
-Typography uses Manrope for headings and Inter for body copy with system fallbacks. Europe-focused presentation copy is based on existing career facts. The public presentation refreshes known legacy profile text without overwriting custom CMS changes or claiming European work authorization, local certifications or additional spoken language skills.
+Typography uses Manrope for headings and Inter for body copy with system fallbacks. Employer-focused presentation copy is based on existing career facts. The public presentation refreshes known legacy profile text without overwriting custom CMS changes or claiming European work authorization, local certifications or additional spoken language skills.
 
 References: https://supabase.com/docs/guides/platform/free-project-pausing and https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule
+
+
+The public site uses neutral, UAE-based positioning without regional hiring labels. The three operations-story slides use existing CMS event and outlet-opening records with local image fallbacks. Visitors can switch stories using buttons or arrow keys; there is no automatic rotation.
