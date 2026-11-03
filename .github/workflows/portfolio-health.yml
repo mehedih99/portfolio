@@ -1,0 +1,31 @@
+name: Daily portfolio health
+on:
+  schedule:
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/portfolio-health.yml'
+      - 'scripts/portfolio-health.mjs'
+      - 'assets/js/config.js'
+permissions:
+  contents: read
+concurrency:
+  group: portfolio-health
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read health check and public configuration from this commit
+        env:
+          REPOSITORY: ${{ github.repository }}
+          COMMIT: ${{ github.sha }}
+        run: |
+          mkdir -p scripts assets/js
+          curl --fail --silent --show-error --retry 2 "https://raw.githubusercontent.com/$REPOSITORY/$COMMIT/scripts/portfolio-health.mjs" -o scripts/portfolio-health.mjs
+          curl --fail --silent --show-error --retry 2 "https://raw.githubusercontent.com/$REPOSITORY/$COMMIT/assets/js/config.js" -o assets/js/config.js
+      - name: Load website and verify Supabase database access
+        run: node scripts/portfolio-health.mjs

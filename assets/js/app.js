@@ -15,6 +15,7 @@
   $('#heroHeadline').textContent = content.profile.headline;
   $('#heroLead').textContent = content.profile.subheadline;
   $('#heroPhoto').src = content.profile.photo;
+  $('#heroPhoto').addEventListener('error',function(){if(!this.dataset.fallback){this.dataset.fallback='true';this.src='assets/images/profile.webp'}});
   $('#heroPills').innerHTML = ['Cafe Management','F&B Operations','Team Leadership','Procurement','Events','Digital Operations'].map(x=>`<span class="pill">${esc(x)}</span>`).join('');
   $('#heroStrip').innerHTML = (content.profile.heroImages||[]).slice(0,3).map(x=>`<img src="${esc(x)}" alt="Career visual">`).join('');
   $('#heroLocation').textContent = content.profile.location;
