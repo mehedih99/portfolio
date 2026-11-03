@@ -13,14 +13,16 @@
     configured: !placeholder,
     clone(obj){ return JSON.parse(JSON.stringify(obj)); },
     async loadContent(){
-      const local = localStorage.getItem('portfolio_content_preview');
-      if (!sb) return local ? JSON.parse(local) : this.clone(window.DEFAULT_CONTENT);
+      const readCache=key=>{try{const value=JSON.parse(localStorage.getItem(key));return value?.profile?value:null}catch{return null}};
+      const local=readCache('portfolio_content_preview');
+      const cached=readCache('portfolio_content_last_good');
+      if (!sb) return local || cached || this.clone(window.DEFAULT_CONTENT);
       try {
-        const { data, error } = await sb.from('portfolio_content').select('content').eq('id', cfg.contentRowId || 1).maybeSingle();
+        const { data, error } = await sb.from('portfolio_content').select('content').eq('id', cfg.contentRowId || 1).maybeSingle().abortSignal(AbortSignal.timeout(5000));
         if (error) throw error;
-        if (data && data.content && Object.keys(data.content).length) return data.content;
+        if (data?.content?.profile) {try{localStorage.setItem('portfolio_content_last_good',JSON.stringify(data.content))}catch{}return data.content;}
       } catch (e) { console.warn('Remote portfolio load failed, using fallback.', e); }
-      return local ? JSON.parse(local) : this.clone(window.DEFAULT_CONTENT);
+      return cached || local || this.clone(window.DEFAULT_CONTENT);
     },
     async saveContent(content){
       localStorage.setItem('portfolio_content_preview', JSON.stringify(content));
